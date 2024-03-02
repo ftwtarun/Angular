@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row align-items-center">
+      <div class="col-sm-8">
+        <div class="form-group">
+          <input type="text" class="form-control search-input" [(ngModel)]="movieName" placeholder="Enter Movie Name">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <button type="button" class="btn btn-primary search-button" (click)="searchMovie()">Search Movie</button>
+        <div class="abc">
+            <div *ngIf="isLoading" class="loader"></div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row mt-4">
+      <div class="col-sm-12">
+        <p class="text-left">Your username is: {{ username }}</p>
+      </div>
+    </div>
+  
+    <div *ngIf="movieDetails" class="card movie-details">
+      <div class="card-header bg-primary text-white">
+        <h2>{{ movieDetails.Title }} ({{ movieDetails.Year }})</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <img src="{{ movieDetails.Poster }}" alt="{{ movieDetails.Title }} Poster" class="img-fluid">
+          </div>
+          <div class="col-sm-8">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th scope="row">Rated:</th>
+                  <td>{{ movieDetails.Rated }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Released:</th>
+                  <td>{{ movieDetails.Released }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Runtime:</th>
+                  <td>{{ movieDetails.Runtime | minutesToHours }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Genre:</th>
+                  <td>{{ movieDetails.Genre }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="card-text"><strong>Plot:</strong> {{ movieDetails.Plot }}</p>
+            <h3>Ratings</h3>
+            <ul>
+              <li *ngFor="let rating of movieDetails.Ratings">
+                {{ rating.Source }}: {{ rating.Value }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
